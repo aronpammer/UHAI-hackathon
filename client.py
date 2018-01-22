@@ -43,7 +43,7 @@ def uploadNewFile(fileName):
     if fileIdentifier in g_file_dict:
         return g_file_dict[fileIdentifier]
 
-    # result = call analyse(file)
+    # diag_result = call analyse(file)
     # g_file_dict [fileIdentifier] = result
     # block chain add(userid, fileid, result)
     json_data = {'patientID': 'd4ee26eee15148ee92c6cd394edd974e',
@@ -55,7 +55,8 @@ def uploadNewFile(fileName):
     r = requests.post(url, data=json.dumps(json_data), headers=headers)
 
     print("content %s",  r.content)
-    return result
+    ret_dict = {'diag_result': diag_result, 'fileHash': fileHash}
+    return ret_dict; #result
 
 
 def main():

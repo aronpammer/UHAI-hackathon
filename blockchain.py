@@ -208,14 +208,20 @@ def mine():
 @app.route('/transactions/uploadFile', methods=['POST'])
 def uploadFile():
     newfile = request.files.get('imageUpload')
+    values = request.get_json()
     #TODO: Do we check for image type??
     save_path = os.path.join(UPLOAD_DIR, newfile.filename)
     newfile.save(save_path)
 
     #TODO: Not sure if this will work! Verify
     print("Saving file to location {something}".format(something=save_path))
-    diag_result = client.uploadNewFile(save_path)
+    result_dict = client.uploadNewFile(save_path)
+    print("adding to block chain {patient,hash,diagnose}".format(patient=values['patientID'],
+                                                               hash=result_dict['fileHash'],
+                                                               diagnose=result_dict['diag_result']))
+    index = blockchain.new_transaction(values['patientID'], result_dict['fileHash'], result_dict['diag_result'])
 
+    response = {'message': 'Transaction will be added to Block {index}'.format(index=index)}
     return jsonify(response), 200
 
 @app.route('/transactions/new', methods=['POST'])
@@ -223,12 +229,12 @@ def new_transaction():
     values = request.get_json()
     print('Got a new request')
     # Check that the required fields are in the POST'ed data
-    required = ['sender', 'recipient', 'amount']
+    required = ['patientID', 'fileHash', 'diagnosis']
     if not all(k in values for k in required):
         return 'Missing values', 400
 
     # Create a new Transaction
-    index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
+    index = blockchain.new_transaction(values['patientID'], values['fileHash'], values['diagnosis'])
 
     response = {'message': 'Transaction will be added to Block {index}'.format(index=index)}
     return jsonify(response), 201
