@@ -3,17 +3,31 @@ from flask import Flask, jsonify, request, render_template
 # Instantiate the Node
 app = Flask(__name__)
 
+
 @app.route('/account', methods=['GET'])
 def main():
     return render_template("main_content.html")
+
 
 @app.route('/upload', methods=['GET'])
 def upload():
     return render_template("upload.html")
 
+
+@app.route('/upload_image', methods=['POST'])
+def upload_image():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'image-file' not in request.files:
+            return 'No file part'
+        file = request.files['image-file']
+    return "file uploaded"
+
+
 @app.route('/', methods=['GET'])
 def login():
     return render_template("index.html")
+
 
 
 if __name__ == '__main__':

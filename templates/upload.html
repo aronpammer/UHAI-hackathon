@@ -3,5 +3,11 @@
 <div class="jumbotron-uhai jumbotron-uhai-content">
     <h4 class="uppercase">Upload a new image for analysis</h4>
     <hr align="center">
+    <form method="POST" action="/upload_image" enctype="multipart/form-data">
+        <label class="btn btn-default btn-file">
+            <input type="file" name="image-file">
+        </label>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>
 {% endblock %}
