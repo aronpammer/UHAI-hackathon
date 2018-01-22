@@ -5,9 +5,9 @@ from urlparse import urlparse
 from uuid import uuid4
 
 import requests
+import client
 
 from flask import Flask, jsonify, request
-
 
 class Blockchain:
     def __init__(self):
@@ -109,7 +109,7 @@ class Blockchain:
         self.chain.append(block)
         return block
 
-    def new_transaction(self, sender, recipient, amount):
+    def new_transaction(self, patientID, filehash, diagnosis):
         """
         Creates a new transaction to go into the next mined Block
         :param sender: Address of the Sender
@@ -118,9 +118,9 @@ class Blockchain:
         :return: The index of the Block that will hold this transaction
         """
         self.current_transactions.append({
-            'sender': sender,
-            'recipient': recipient,
-            'amount': amount,
+            'patientID': patientID,
+            'fileHash': filehash,
+            'result': diagnosis,
         })
 
         return self.last_block['index'] + 1
@@ -207,6 +207,15 @@ def mine():
 
 @app.route('/transactions/uploadFile', methods=['POST'])
 def uploadFile():
+    newfile = request.files.get('imageUpload')
+    #TODO: Do we check for image type??
+    save_path = os.path.join(UPLOAD_DIR, newfile.filename)
+    newfile.save(save_path)
+
+    #TODO: Not sure if this will work! Verify
+    print("Saving file to location {something}".format(something=save_path))
+    diag_result = client.uploadNewFile(save_path)
+
     return jsonify(response), 200
 
 @app.route('/transactions/new', methods=['POST'])

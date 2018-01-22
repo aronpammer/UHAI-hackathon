@@ -33,7 +33,6 @@ def uploadNewFile(fileName):
     if (fileName is None):
         return -1
 
-
     filehash = None
     with open(fileName, 'rb') as fp:
         filehash = IpfsInterface.addFileObj(fp)
@@ -56,6 +55,7 @@ def uploadNewFile(fileName):
     r = requests.post(url, data=json.dumps(json_data), headers=headers)
 
     print("content %s",  r.content)
+    return result
 
 
 def main():
