@@ -3,13 +3,16 @@ from flask import Flask, jsonify, request, render_template
 # Instantiate the Node
 app = Flask(__name__)
 
+@app.route('/account', methods=['GET'])
+def main():
+    return render_template("main_content.html")
+
+@app.route('/upload', methods=['GET'])
+def upload():
+    return render_template("upload.html")
+
 @app.route('/', methods=['GET'])
 def login():
-    return render_template("main.html",
-                           name="John")
-
-@app.route('/', methods=['POST'])
-def login_post():
     return render_template("index.html")
 
 

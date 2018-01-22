@@ -1,3 +1,76 @@
 body {
     background-color: #F7F7F7;
 }
+.jumbotron-uhai {
+    background-color: #FFFFFF;
+    border: 1px solid #F0EFEC;
+    border-radius: .3rem;
+    width: 100%;
+}
+
+.vertical-tabs-cell {
+    display: block;
+    position: relative;
+    padding: 10px;
+    text-decoration: none;
+    background-color: #fff;
+    border-bottom: 1px solid #F0EFEC;
+    border-radius: 0.3rem 0.3rem 0rem 0rem;
+
+    color: #6D6E71;
+}
+
+.vertical-tabs-cell:last-child{
+    border: 0;
+    border-radius: 0rem 0rem 0.3rem 0.3rem;
+}
+
+.icon-left {
+    width: 25px;
+}
+
+
+.icon-right {
+    position: absolute;
+    right: 15px;
+    padding-top: 5px;
+    color: #6D6E71;
+}
+
+.icon-middle {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #FC9E44;
+}
+
+.jumbotron-uhai-content {
+    padding: 10px 30px 20px;
+    margin-bottom: 30px;
+}
+
+.jumbotron-uhai-content > h4 {
+    margin: 10px 0;
+}
+
+h4 {
+    color: #757575;
+    font-size: 18px;
+    line-height: 17px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.fa {
+    -webkit-text-stroke: 1px background-color;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #FC9E44;
+    padding: 0;
+    width: 40%;
+}

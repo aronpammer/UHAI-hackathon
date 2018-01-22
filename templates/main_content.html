@@ -1,0 +1,18 @@
+{% extends "segmented_layout.html" %}
+{% block segmented_content %}
+<div class="jumbotron-uhai jumbotron-uhai-content">
+    <h4 class="uppercase">Heart rate as a function of age and healthscore</h4>
+    <hr align="center">
+    <canvas id="canvas_age_healthscore" width="2136" height="1068" class="chartjs-render-monitor" style="display: block; height: 534px; width: 1068px;"></canvas>
+</div>
+<div class="jumbotron-uhai jumbotron-uhai-content">
+    <h4 class="uppercase">Your RADAR graph</h4>
+    <hr align="center">
+    <canvas id="chart-0" width="1024" height="512" class="chartjs-render-monitor" style="display: block; height: 256px; width: 512px;"></canvas>
+</div>
+
+<script src="static/js/age-healthscore-graph.js"></script>
+<script src="static/js/radar-graph.js"></script>
+
+
+{% endblock %}
