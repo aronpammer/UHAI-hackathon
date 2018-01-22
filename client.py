@@ -18,8 +18,8 @@ import ipfsapi
 
 import requests
 #from flask import Flask, jsonify, request
-global __is_init = False
-global g_file_dict
+__is_init = False;
+g_file_dict
 def init():
     if __is_init is True:
         return
@@ -46,6 +46,10 @@ def uploadNewFile(fileName):
     # diag_result = call analyse(file)
     # g_file_dict [fileIdentifier] = result
     # block chain add(userid, fileid, result)
+
+    # we dont need to add to the block chain here since
+    # the caller is doing it
+    '''
     json_data = {'patientID': 'd4ee26eee15148ee92c6cd394edd974e',
                  'fileHash': 'someone-other-address',
                  'result': '10'}
@@ -55,6 +59,7 @@ def uploadNewFile(fileName):
     r = requests.post(url, data=json.dumps(json_data), headers=headers)
 
     print("content %s",  r.content)
+    '''
     ret_dict = {'diag_result': diag_result, 'fileHash': fileHash}
     return ret_dict; #result
 
@@ -70,4 +75,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
