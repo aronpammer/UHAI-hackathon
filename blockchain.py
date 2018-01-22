@@ -6,9 +6,10 @@ from uuid import uuid4
 
 import requests
 import client
+import os
 
 from flask import Flask, jsonify, request
-
+UPLOAD_DIR="/Users/koushiksampath/projects/UHAI-hackathon"
 class Blockchain:
     def __init__(self):
         self.current_transactions = []
@@ -205,18 +206,19 @@ def mine():
     }
     return jsonify(response), 200
 
-@app.route('/transactions/uploadFile', methods=['POST'])
-def uploadFile():
-    newfile = request.files.get('imageUpload')
-    values = request.get_json()
+def uploadFile(myfile):
     #TODO: Do we check for image type??
-    save_path = os.path.join(UPLOAD_DIR, newfile.filename)
-    newfile.save(save_path)
-
+    save_path = os.path.join(UPLOAD_DIR, myfile.filename)
+    myfile.save(save_path)
+    values = {}
+    patientID = "A58A737AC7204BC587071DA74F245A18"
+    values['patientID'] = patientID
+    #TODO: Remove this
+    values['diag_result'] = 1
     #TODO: Not sure if this will work! Verify
     print("Saving file to location {something}".format(something=save_path))
     result_dict = client.uploadNewFile(save_path)
-    print("adding to block chain {patient,hash,diagnose}".format(patient=values['patientID'],
+    print("adding to block chain {patient},{hash},{diagnose}".format(patient=patientID,
                                                                hash=result_dict['fileHash'],
                                                                diagnose=result_dict['diag_result']))
     index = blockchain.new_transaction(values['patientID'], result_dict['fileHash'], result_dict['diag_result'])
@@ -284,7 +286,6 @@ def consensus():
 
     return jsonify(response), 200
 
-
 if __name__ == '__main__':
     from argparse import ArgumentParser
 
@@ -293,4 +294,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     port = args.port
 
-app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port)

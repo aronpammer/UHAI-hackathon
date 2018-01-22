@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, render_template
-
+import blockchain
 # Instantiate the Node
 app = Flask(__name__)
 
@@ -21,6 +21,7 @@ def upload_image():
         if 'image-file' not in request.files:
             return 'No file part'
         file = request.files['image-file']
+        blockchain.uploadFile(file)
     return "file uploaded"
 
 
