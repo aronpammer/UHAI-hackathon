@@ -5,20 +5,13 @@ body {
 }
 
 .navbar-nav {
-    float:none;
-    margin:0 auto;
-    display: block;
-    text-align: center;
-}
 
-.navbar-nav > li {
-    display: inline-block;
-    float:none;
 }
 
 .navbar {
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.16);
     background-color: white;
+    padding-bottom: 0px;
 }
 
 .nav-link {
@@ -33,14 +26,16 @@ body {
     font-weight: 400;
     margin-left: 16px;
     margin-right: 16px;
+
+}
+
+.nav-link-selected {
+    padding-bottom: 10px;
+    border-bottom: 2px solid #FC9E44;
 }
 
 .uhai-brand-text {
     color: #757575;
     font-size: 16px;
     font-weight: 400;
-}
-
-.navbar-buttons {
-    margin-left: -100px;
 }

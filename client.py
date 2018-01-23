@@ -18,7 +18,7 @@ import ipfsapi
 
 import requests
 #from flask import Flask, jsonify, request
-__is_init = False;
+__is_init = False
 g_file_dict
 def init():
     if __is_init is True:

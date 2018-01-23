@@ -18,6 +18,7 @@
     <link href="static/css/navbar-top-fixed.css" rel="stylesheet">
     <link href="static/css/main.css" rel="stylesheet">
     <link href="static/css/font.css" rel="stylesheet">
+      {% block extra_header %} {% endblock %}
     <script src="http://www.chartjs.org/dist/2.7.1/Chart.bundle.js"></script>
       <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
   </head>
@@ -33,10 +34,10 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <!--<div class="collapse navbar-collapse navbar-buttons" id="navbarCollapse">
+      <div class="collapse navbar-collapse navbar-buttons" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link nav-link-selected" href="#">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Lorem</a>
@@ -48,7 +49,7 @@
             <a class="nav-link" href="#">More</a>
           </li>
         </ul>
-      </div>-->
+      </div>
     </nav>
 
     <main role="main" class="container" >
@@ -57,5 +58,7 @@
     </main>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="static/js/bootstrap.min.js"></script>
+    {% block extra_script %}
+    {% endblock %}
   </body>
 </html>
