@@ -72,7 +72,7 @@ def main():
         sys.stdout.flush()
         sleep(0.5)
 
-    createNewBlock();
+    createNewBlock()
 
 if __name__ == "__main__":
     main()
