@@ -5,6 +5,7 @@
   "main": "web3.js",
   "dependencies": {
     "ethereumjs-testrpc": "^6.0.3",
+    "express": "^4.16.2",
     "web3": "git+https://github.com/ethereum/web3.js.git#v1.0.0-beta.17"
   },
   "devDependencies": {},
