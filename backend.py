@@ -14,6 +14,11 @@ def upload():
     return render_template("upload.html")
 
 
+@app.route('/history', methods=['GET'])
+def history():
+    return render_template("history.html")
+
+
 @app.route('/upload_image', methods=['POST'])
 def upload_image():
     if request.method == 'POST':
