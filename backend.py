@@ -9,6 +9,10 @@ app = Flask(__name__)
 def home():
     return redirect("/account", code=302)
 
+@app.route('/uploading', methods=['GET'])
+def uploading():
+    return render_template("uploading.html")
+
 @app.route('/account', methods=['GET'])
 def main():
     return render_template("main_content.html")
