@@ -29,6 +29,17 @@ def upload_image():
         blockchain.uploadFile(file)
     return "file uploaded"
 
+def upload_file_to_ipfs(file):
+    import IpfsInterface
+    file_hash = IpfsInterface.addFileObj(file)
+    # here we are going to analyze the data
+    # ...
+
+    # here we are going to upload the data to eth
+    # ...
+    print("file hash {file}".format(file=file_hash))
+
+
 
 @app.route('/', methods=['GET'])
 def login():

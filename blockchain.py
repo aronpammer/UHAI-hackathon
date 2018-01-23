@@ -250,23 +250,15 @@ def full_chain():
     }
     return jsonify(response), 200
 
-@app.route('/patientHistory', methods=['GET'])
+
+@app.route('/patient_history', methods=['GET'])
 def retrievePatient():
     in_patientID = request.get("patientID")
-    respondList = []
-    respondListIter = 0;
-    chain = full_chain()
-    traverseChain = chain['chain']
-    i = 0;
-    while (i < len(traverseChain)):
-        block = traverseChain[i]
-        btransaction = block['transactions']
+    response = []
+    for block in blockchain.chain:
+        print(block)
 
-        if (btransaction['patientID'] == in_patientID):
-            respondList[respondListIter] = btransaction
-            respondListIter=respondListIter+1
-        i=i+1
-    return jsonify(respondList), 200
+    return jsonify(response), 200
 
 @app.route('/nodes/register', methods=['POST'])
 def register_nodes():
