@@ -1,8 +1,13 @@
 from flask import Flask, jsonify, request, render_template, redirect
 import blockchain
 # Instantiate the Node
+import convolutional_neural_network_predict
+
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def home():
+    return redirect("/account", code=302)
 
 @app.route('/account', methods=['GET'])
 def main():
@@ -41,7 +46,8 @@ def upload_image():
             return 'No file part'
         file = request.files['image-file']
         description = request.form['description']
-        upload_file_to_ipfs_blockchain(file, description)
+        result = convolutional_neural_network_predict.predict_breast_cancer(file)
+        upload_file_to_ipfs_blockchain(file, description, result)
     return redirect("/history", code=302)
 
 # there can be any number of contract addresses, ideally one per patient, for the demo we are only using one
@@ -49,12 +55,11 @@ STATIC_CONTRACT_ADDRESS = "0xe12fe06c6e5b3d94bd7a2178fda3f8029b9f0361"
 # the from address would be ideally the service's address that uploads the data to the blockchain, in this case UHAI
 STATIC_FROM_ADDRESS = "0x0fC1A83F77FA3C9f53dbA8B439D861faA35fE315"
 
-def upload_file_to_ipfs_blockchain(file, description):
+def upload_file_to_ipfs_blockchain(file, description, result):
     file_hash = "FILEHASH"  #IpfsInterface.addFileObj(file)
     print("file hash {file}".format(file=file_hash))
     # here we are going to analyze the data
     # ...
-    result = "0.3"
 
     # here we are going to upload the data to eth
 
@@ -69,7 +74,7 @@ def upload_file_to_ipfs_blockchain(file, description):
         from_address=STATIC_FROM_ADDRESS,
         gas=3000000,
         datetime=date_time
-    )).text
+    ), timeout=5).text
     print(response)
 
 def get_diagnosis_from_blockchain():
@@ -110,4 +115,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     port = args.port
 
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=False)
