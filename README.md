@@ -6,6 +6,7 @@ Please visit us at www.uhai.io
 Executive Summary: https://uhai.io/publications/UHAI_Summary_English.pdf
 White Paper: https://uhai.io/publications/UHAI_white_paper_longform_english.pdf
 
+![System](https://github.com/velvetz7/UHAI-hackathon/blob/master/system.PNG)
 # FutureHack Hackathon
 
 The UHAI Breast Cancer Detection Project is an end-to-end offering that can determine if a mass lesion on an x-ray image is benign or cancerous.  To achieve this analysis, we leveraged IPFS (a decentralized file storage) and Ethereum blockchains in combination with our internally tuned machine learning algorithms. Currently users can receive almost as good as a radiologist diagnosis by simply uploading an mammography (68% accuracy algorithm developed during the Hackathon) which can be later improved above 90% based on recent studies [3] . The results are returned within seconds.
@@ -55,7 +56,8 @@ Please see technical document.
 
 # Module interactions
 
-Please refer to the system.png diagram
+![Receiving Data](https://github.com/velvetz7/UHAI-hackathon/blob/master/receiving_data.PNG)
+![Sending Data](https://github.com/velvetz7/UHAI-hackathon/blob/master/sending.PNG)
 
 # Dependencies
 
@@ -72,12 +74,9 @@ Please refer to the system.png diagram
 
 # Scalability
 
-UHAI can handle a few hundred requests per second.
+UHAI can handle a few hundred requests per second currently on a consumer laptop,  but it can be easily scaled to higher level by deployin on e.g Amazon AWS
 
-UHAI is dependent on IPFS which has an evaluated
-IO bandwidth of 2MBps in the current network that we have here.
-The current infrastructure of a 5Ghz wifi network will gate how much
-data can be sent on the wire.
+UHAI is dependent on IPFS.
 
 On a faster network infrastructure, UHAI can scale to much more
 than what we observe here.
