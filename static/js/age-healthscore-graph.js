@@ -1,18 +1,17 @@
 var lineChartData = {
-        labels: ["25", "30", "35", "40", "45", "50", "55", "60", "65", "70"],
+        labels: ["25", "30", "35", "40", "45", "50"],
         datasets: [{
             label: "Your weight",
             borderColor: window.chartColors.red,
             backgroundColor: window.chartColors.red,
             fill: false,
             data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
+                140,
+                150,
+                160,
+                162,
+                165,
+                160
             ],
             yAxisID: "y-axis-1",
         }, {
@@ -21,13 +20,12 @@ var lineChartData = {
             backgroundColor: window.chartColors.blue,
             fill: false,
             data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor()
+                87,
+                90,
+                89,
+                83,
+                84,
+                90
             ],
             yAxisID: "y-axis-2"
         }]

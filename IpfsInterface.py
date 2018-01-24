@@ -63,7 +63,7 @@ def retriveFile(fileHash):
         return
 
     print("Hash to retrieve {something}".format(something=fileHash))
-    api.get(fileHash)
+    return api.get(fileHash, filepath="ipfs_downloads/")
 
 '''
 def main():

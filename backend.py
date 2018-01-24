@@ -5,13 +5,16 @@ import convolutional_neural_network_predict
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET'])
 def home():
     return redirect("/account", code=302)
 
+
 @app.route('/uploading', methods=['GET'])
 def uploading():
     return render_template("uploading.html")
+
 
 @app.route('/account', methods=['GET'])
 def main():
@@ -23,23 +26,32 @@ def upload():
     return render_template("upload.html")
 
 
+@app.route('/download/<ipfs_id>')
+def download_ipfs(ipfs_id):
+    import IpfsInterface
+    from flask import send_file
+    file = IpfsInterface.retriveFile(ipfs_id)
+    return send_file("ipfs_downloads/{}".format(ipfs_id))
+
 @app.route('/history', methods=['GET'])
 def history():
     diagnosises = []
     for response in get_diagnosis_from_blockchain():
         print(response)
         # get file_url from ipfs
-        file_url = response["fileHash"]
+        file_hash = response["fileHash"]
         result = response["diagnosis"]
         date_time = response["date"]
         description = response["description"]
+        is_cancerous = "cancerous" if float(response["diagnosis"]) > 0.5 else "not cancerous"
         diagnosises.append({
-            "file_url": file_url,
+            "file_hash": file_hash,
             "description": description,
-            "result": float(result) * 100,
-            "date": date_time
+            "result": round(float(result) * 100, 2),
+            "date": date_time,
+            "is_cancerous": is_cancerous
         })
-    return render_template("history.html", diagnosises=diagnosises)
+    return render_template("history.html", diagnosises=list(reversed(diagnosises)))
 
 
 @app.route('/upload_image', methods=['POST'])
@@ -51,16 +63,21 @@ def upload_image():
         file = request.files['image-file']
         description = request.form['description']
         result = convolutional_neural_network_predict.predict_breast_cancer(file)
+        #file.save("static/image/{}".format(file.filename))
+        #import mritopng
+        #mritopng.convert_file("static/image/{}".format(file.filename), "static/image/{}.png".format(file.filename))
+
         upload_file_to_ipfs_blockchain(file, description, result)
-    return redirect("/history", code=302)
+    return redirect("/uploading", code=302)
 
 # there can be any number of contract addresses, ideally one per patient, for the demo we are only using one
-STATIC_CONTRACT_ADDRESS = "0xe12fe06c6e5b3d94bd7a2178fda3f8029b9f0361"
+STATIC_CONTRACT_ADDRESS = "0x634757c0bc710d88547f7937ee57b3b5b45a6d61"
 # the from address would be ideally the service's address that uploads the data to the blockchain, in this case UHAI
 STATIC_FROM_ADDRESS = "0x0fC1A83F77FA3C9f53dbA8B439D861faA35fE315"
 
 def upload_file_to_ipfs_blockchain(file, description, result):
-    file_hash = "FILEHASH"  #IpfsInterface.addFileObj(file)
+    import IpfsInterface
+    file_hash = IpfsInterface.addFileObj(file)
     print("file hash {file}".format(file=file_hash))
     # here we are going to analyze the data
     # ...
@@ -69,7 +86,7 @@ def upload_file_to_ipfs_blockchain(file, description, result):
 
     import requests
     import datetime
-    date_time = datetime.datetime.today().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    date_time = datetime.datetime.today().strftime("%b %d %Y at %I:%M %p").upper()
     response = requests.get("http://localhost:1337/add_diagnosis/{contract_address}?filehash={file_hash}&result={result}&from={from_address}&gas={gas}&description={description}&datetime={datetime}".format(
         contract_address=STATIC_CONTRACT_ADDRESS,
         file_hash=file_hash,
@@ -101,7 +118,12 @@ def get_diagnosis_from_blockchain():
         if "ERROR" in response:
             break
         import json
-        yield json.loads(response)
+        try:
+            obj = json.loads(response)
+            yield obj
+        except:
+            pass
+
         id += 1
 
 

@@ -21,45 +21,14 @@
 		}
 
 		utils.srand(42);
-
+        console.log(generateLabels());
 		var data = {
-			labels: generateLabels(),
+			labels: ["20", "25", "30", "35", "40", "45", "50"],
 			datasets: [{
 				backgroundColor: utils.transparentize(presets.red),
 				borderColor: presets.red,
-				data: generateData(),
-				label: 'D0'
-			}, {
-				backgroundColor: utils.transparentize(presets.orange),
-				borderColor: presets.orange,
-				data: generateData(),
-				hidden: true,
-				label: 'D1',
-				fill: '-1'
-			}, {
-				backgroundColor: utils.transparentize(presets.yellow),
-				borderColor: presets.yellow,
-				data: generateData(),
-				label: 'D2',
-				fill: 1
-			}, {
-				backgroundColor: utils.transparentize(presets.green),
-				borderColor: presets.green,
-				data: generateData(),
-				label: 'D3',
-				fill: false
-			}, {
-				backgroundColor: utils.transparentize(presets.blue),
-				borderColor: presets.blue,
-				data: generateData(),
-				label: 'D4',
-				fill: '-1'
-			}, {
-				backgroundColor: utils.transparentize(presets.purple),
-				borderColor: presets.purple,
-				data: generateData(),
-				label: 'D5',
-				fill: '-1'
+				data: [75, 92, 88, 90, 72, 88, 89],
+				label: 'Health score'
 			}]
 		};
 

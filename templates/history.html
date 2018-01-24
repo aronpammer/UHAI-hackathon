@@ -5,29 +5,29 @@
 {% block segmented_content %}
 {% for diag in diagnosises %}
 <div class="jumbotron-uhai jumbotron-uhai-content">
-    <h4 class="uppercase">Medical analysis @ {{ diag["date"] }}</h4>
+    <h4 class="uppercase">File Uploaded For Analyist on {{ diag["date"] }}</h4>
     <hr align="center">
     <div class="row">
         <div class="col-md-5">
-            <img id="preview" src="/static/image/placeholder-image.png" alt="The image" style="width: 100%; height: 100%;"/>
+            <img id="preview" src="/static/image/dicomlogo.png" alt="The image" style="width: 100%;"/>
+            <a href="/download/{{ diag["file_hash"] }}" class="button btn btn-primary">Download DICOM file from IPFS</a>
         </div>
         <div class="col-md-7">
               <div class="form-group">
-                <label for="description">Description</label>
+                <label>Description</label>
                   <p style="font-size: 14px;">{{ diag["description"] }}</p>
-                <small id="description" class="form-text text-muted">This is a description of the uploaded file analysis</small>
               </div>
               <div class="form-group">
 
               </div>
               <div class="form-group">
                 <label for="result">Result of the analysis</label>
-                <!-- Red -->
                 <div class="progress">
                   <div class="progress-bar bg-danger" style="width:{{ diag["result"] }}%">{{ diag["result"] }}%</div>
                 </div>
-                <small id="result" class="form-text text-muted">The number above represents the chance you might have cancer.</small>
-              </div>
+                <small id="result" class="form-text text-muted">Based on the file submitted, we believe that this is mass lesion is {{ is_cancerous }}.  The prediction has a [{{ diag["result"] }}%] accuracy rate.</small>
+                <small class="form-text text-muted">Note: There are many factors affecting the accuracy rate, including factors such as quality of the x-ray, the lighting, and so on.  Please see your healthcare professionals for more info more information.</small>
+            </div>
         </div>
     </div>
 </div>

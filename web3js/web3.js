@@ -118,7 +118,10 @@ app.get('/', (request, response) => {
   response.send('Hello from Express!')
 });
 
+
+
 app.get('/diagnosis/:contractaddress/:id', (request, response) => {
+try {
   console.log("processing get request...");
   let id = request.params.id;
   //0x6477e21f70ee303bb0a47b96a737cbf64eb99852
@@ -134,6 +137,10 @@ app.get('/diagnosis/:contractaddress/:id', (request, response) => {
             response.send(error);
         }
     });
+    }
+    catch(err) {
+        response.send("empty");
+    }
 });
 
 
