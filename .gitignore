@@ -6,3 +6,4 @@ node_modules/
 *.pyc
 package-lock.json
 machine_learning/inceptionv3_model.h5py
+static/image/dicom/
