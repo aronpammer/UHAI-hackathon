@@ -10,15 +10,15 @@ White Paper: https://uhai.io/publications/UHAI_white_paper_longform_english.pdf
 
 The UHAI Breast Cancer Detection Project is an end-to-end offering that can determine if a mass lesion on an x-ray image is benign or cancerous.  To achieve this analysis, we leveraged IPFS (a decentralized file storage) and Ethereum blockchains in combination with our internally tuned machine learning algorithms. Currently users can receive almost as good as a radiologist diagnosis by simply uploading an mammography (68% accuracy algorithm developed during the Hackathon) which can be later improved above 90% based on recent studies [3] . The results are returned within seconds.
 
-*IMPACT:* We are providing solutions under SDG 3, Health and Wellbeing.  We have chosen breast cancer because it is the number one killer of women globally at 800k deaths annual.  As well, it’s the number one new cancer case in the world, at 30%.  Breast cancer affects every mother, daughter, aunt—- every woman on the planet.  For the very first time, patients can upload her medical information to a platform that will give instant diagnosis. The average error rate among radiologists is around 30% [3] . With the help of large datasets and deep learning algorithms our system can help doctors and radiologists to detect malignant breast lesions and decrease this error ratio.
+**IMPACT:** We are providing solutions under SDG 3, Health and Wellbeing.  We have chosen breast cancer because it is the number one killer of women globally at 800k deaths annual.  As well, it’s the number one new cancer case in the world, at 30%.  Breast cancer affects every mother, daughter, aunt—- every woman on the planet.  For the very first time, patients can upload her medical information to a platform that will give instant diagnosis. The average error rate among radiologists is around 30% [3] . With the help of large datasets and deep learning algorithms our system can help doctors and radiologists to detect malignant breast lesions and decrease this error ratio.
 
-*BLOCKCHAIN:*  We use the IPFS (decentralized file storage) to store image files and the Ethereum blockchains to store transactional information and metadata.
+**BLOCKCHAIN:**  We use the IPFS (decentralized file storage) to store image files and the Ethereum blockchains to store transactional information and metadata.
 
-*SCALE:*  The system will scale as fast as the blockchain network.   Plus, the front-end is a webservice and can be powered up by renting computation from provider.   The platform can be globally scaled instantly.
+**SCALE:**  The system will scale as fast as the blockchain network.   Plus, the front-end is a webservice and can be powered up by renting computation from provider.   The platform can be globally scaled instantly.
 
-*DESIGN:*  The system has many components, designed to work separately or collaboratively.  We design the system to blockchain agnostic, which effectively shields us from performance issues of certain blockchains.  If a blockchain cannot scale as fast as we need, we can move to a better one.
+**DESIGN:**  The system has many components, designed to work separately or collaboratively.  We design the system to blockchain agnostic, which effectively shields us from performance issues of certain blockchains.  If a blockchain cannot scale as fast as we need, we can move to a better one.
 
-*WALKTHROUGH:*
+**WALKTHROUGH:**
 User user logs into web
 User uploads x-ray image
 Data is sent to IPS for storage.  System retrieves hash.
@@ -94,7 +94,7 @@ in performance
  
 ### Inception V3 Deep Neural Network Used to Predict Breast Lesion Diagnosis
  
-Our model uses the Inception V3 Convolutional Neural Network pretrained on Imagenet, retraining the top 3 Inception layers to fit the Digital Database of Screening Mammography1 (DDSM) images segmented via radiologist notation and cropped into a Region of Interest (ROI) by the Cancer Imaging Archive (TCIA) Public Access2.
+Our model uses the Inception V3 Convolutional Neural Network pretrained on Imagenet, retraining the top 3 Inception layers to fit the Digital Database of Screening Mammography[1] (DDSM) images segmented via radiologist notation and cropped into a Region of Interest (ROI) by the Cancer Imaging Archive (TCIA) Public Access[2].
  
 The Inception V3 Neural Network was designed by Google and initially trained on the ImageNet Large Visual Recognition Challenge.  It consists of multiple convolutional, pooling, and concatenation batch normalization nodes, in addition to 11 inception models that contain parallel pathways of convolution and pooling nodes.3
  
