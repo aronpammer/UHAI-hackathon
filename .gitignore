@@ -1,3 +1,8 @@
 env/
+env3/
 .idea
 node_modules/
+.DS_Store
+*.pyc
+machine_learning/
+package-lock.json
