@@ -2,11 +2,11 @@
 
 Universal Health Artificial Intelligence (UHAI) is a decentralized platform that processes, stores and unifies electronic medical information on the blockchain where AI is used to detect anomalies and predict health outcomes.  UHAI is powered by UHAI cryptographic utility tokens that enable participants to earn tokens in exchange for participation.  Security and privacy are first priorities.
 
-Please visit us at www.uhai.io
-Executive Summary: https://uhai.io/publications/UHAI_Summary_English.pdf
-White Paper: https://uhai.io/publications/UHAI_white_paper_longform_english.pdf
+Please visit us at www.uhai.io <br />
+Executive Summary: https://uhai.io/publications/UHAI_Summary_English.pdf <br />
+White Paper: https://uhai.io/publications/UHAI_white_paper_longform_english.pdf <br />
 
-![System](https://github.com/velvetz7/UHAI-hackathon/blob/master/system.PNG)
+
 # FutureHack Hackathon
 
 The UHAI Breast Cancer Detection Project is an end-to-end offering that can determine if a mass lesion on an x-ray image is benign or cancerous.  To achieve this analysis, we leveraged IPFS (a decentralized file storage) and Ethereum blockchains in combination with our internally tuned machine learning algorithms. Currently users can receive almost as good as a radiologist diagnosis by simply uploading an mammography (68% accuracy algorithm developed during the Hackathon) which can be later improved above 90% based on recent studies [3] . The results are returned within seconds.
@@ -28,7 +28,7 @@ Results and history are sent back to the user.
 Results + IPFS hash are written onto the Ethereum blockchain.
 
 # OVERALL ARCHITECTURE DIAGRAM*
-Please see technical document.
+![System](https://github.com/velvetz7/UHAI-hackathon/blob/master/system.PNG)
 
 # Major modules
 
