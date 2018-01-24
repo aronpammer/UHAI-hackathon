@@ -57,6 +57,8 @@ Results + IPFS hash are written onto the Ethereum blockchain.
 # Module interactions
 
 ![Receiving Data](https://github.com/velvetz7/UHAI-hackathon/blob/master/receiving_data.PNG)
+<br><br>
+<br><br>
 ![Sending Data](https://github.com/velvetz7/UHAI-hackathon/blob/master/sending.PNG)
 
 # Dependencies
