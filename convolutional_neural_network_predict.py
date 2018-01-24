@@ -13,6 +13,7 @@ import pickle
 import types
 import tempfile
 import keras.models
+from scipy import misc
 
 np.random.seed(123)  # for reproducibility
 import numpy as np
@@ -21,13 +22,14 @@ from skimage import transform as tf
 
 uploaded_file = "machine_learning/Mass-Training_P_00702_RIGHT_CC_1_cropped_easy_to_tell_cancer.dcm"
 deep_learning_model = "machine_learning/inceptionv3_model.h5py"
-convolutional_neural_network = None#load_model(deep_learning_model)
+convolutional_neural_network = load_model(deep_learning_model)
+convolutional_neural_network._make_predict_function()
 
 # mylist=[key for key, value in mydict.items() if mydict[key][0]!='MALIGNANT']
 
 
-def predict_breast_cancer(uploaded_file):
-    return 0.87
+def predict_breast_cancer(uploaded_file, path):
+    #return 0.87
 
     # Loading the model
 
@@ -36,10 +38,14 @@ def predict_breast_cancer(uploaded_file):
     # for i in mylist:
     # ds=dicom.read_file(uploaded_file+i, force=True)
     ds = dicom.read_file(uploaded_file, force=True)
-    ConstPixelDims = (int(ds.Rows), int(ds.Columns))
+    # ConstPixelDims = (int(ds.Rows), int(ds.Columns))
     # ArrayDicom = np.zeros(ConstPixelDims, dtype=ds.pixel_array.dtype)
     # converting scales
     ArrayDicom = (ds.pixel_array / 65535.0) * 256.0
+
+    savingimage = np.round(ArrayDicom)
+    savingimage = savingimage.astype(int)
+    misc.imsave(path, savingimage)
 
     # Neccessary additional transformations - resizing and normalizing
     example = np.array(tf.resize(ArrayDicom, (139, 139)))

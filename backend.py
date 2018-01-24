@@ -1,3 +1,4 @@
+import sys
 from flask import Flask, jsonify, request, render_template, redirect
 import blockchain
 # Instantiate the Node
@@ -61,29 +62,25 @@ def upload_image():
         if 'image-file' not in request.files:
             return 'No file part'
         file = request.files['image-file']
+        tmp_file_path = "/tmp/{}".format(file.filename)
+        file.save(tmp_file_path)
         description = request.form['description']
-        result = convolutional_neural_network_predict.predict_breast_cancer(file)
-        #file.save("static/image/{}".format(file.filename))
-        #import mritopng
-        #mritopng.convert_file("static/image/{}".format(file.filename), "static/image/{}.png".format(file.filename))
+        description = " " + description
+        import IpfsInterface
+        file_hash = IpfsInterface.addFileObj(tmp_file_path)
+        print("file hash {file}".format(file=file_hash))
+        path = "static/image/dicom/{}.png".format(file_hash)
+        result = convolutional_neural_network_predict.predict_breast_cancer(tmp_file_path, path)
 
-        upload_file_to_ipfs_blockchain(file, description, result)
+        upload_file_to_blockchain(file_hash, description, result)
     return redirect("/uploading", code=302)
 
 # there can be any number of contract addresses, ideally one per patient, for the demo we are only using one
-STATIC_CONTRACT_ADDRESS = "0x634757c0bc710d88547f7937ee57b3b5b45a6d61"
+STATIC_CONTRACT_ADDRESS = "0x96d1b1cf4dd8d1cc6d61455ae88e213800877700"
 # the from address would be ideally the service's address that uploads the data to the blockchain, in this case UHAI
 STATIC_FROM_ADDRESS = "0x0fC1A83F77FA3C9f53dbA8B439D861faA35fE315"
 
-def upload_file_to_ipfs_blockchain(file, description, result):
-    import IpfsInterface
-    file_hash = IpfsInterface.addFileObj(file)
-    print("file hash {file}".format(file=file_hash))
-    # here we are going to analyze the data
-    # ...
-
-    # here we are going to upload the data to eth
-
+def upload_file_to_blockchain(file_hash, description, result):
     import requests
     import datetime
     date_time = datetime.datetime.today().strftime("%b %d %Y at %I:%M %p").upper()
@@ -102,6 +99,7 @@ def get_diagnosis_from_blockchain():
     import requests
     id = 0
     while True:
+        loaderror = False
         for i in range(5):
             # don't look at this please, waaaay too hacky...
             try:
@@ -113,16 +111,21 @@ def get_diagnosis_from_blockchain():
             except:
                 pass
             if i == 4:
-                raise "Load error"
-        print(response)
-        if "ERROR" in response:
-            break
-        import json
-        try:
-            obj = json.loads(response)
-            yield obj
-        except:
-            pass
+                loaderror = True
+                print("------------------------------------------------")
+                print("LOAD ERROR!LOAD ERROR!LOAD ERROR!LOAD ERROR! id:{}".format(id))
+                print("------------------------------------------------")
+
+        if loaderror is False:
+            import json
+            print(response)
+            if "ERROR" in response:
+                break
+            try:
+                obj = json.loads(response)
+                yield obj
+            except:
+                pass
 
         id += 1
 
@@ -138,7 +141,11 @@ if __name__ == '__main__':
 
     parser = ArgumentParser()
     parser.add_argument('-p', '--port', default=8000, type=int, help='port to listen on')
+    parser.add_argument('-c', '--contract', default="0x96d1b1cf4dd8d1cc6d61455ae88e213800877700", type=str, help='the sample contract address')
+    parser.add_argument('-a', '--account', default="0x0fC1A83F77FA3C9f53dbA8B439D861faA35fE315", type=str, help='you personal ethereum account address')
     args = parser.parse_args()
     port = args.port
+    STATIC_CONTRACT_ADDRESS = args.contract
+    STATIC_FROM_ADDRESS = args.account
 
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=False, threaded=True)

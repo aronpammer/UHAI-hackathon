@@ -9,7 +9,7 @@
     <hr align="center">
     <div class="row">
         <div class="col-md-5">
-            <img id="preview" src="/static/image/dicomlogo.png" alt="The image" style="width: 100%;"/>
+            <img id="preview" src="/static/image/dicom/{{ diag["file_hash"] }}.png" alt="The image" style="width: 100%;"/>
             <a href="/download/{{ diag["file_hash"] }}" class="button btn btn-primary">Download DICOM file from IPFS</a>
         </div>
         <div class="col-md-7">
@@ -25,7 +25,7 @@
                 <div class="progress">
                   <div class="progress-bar bg-danger" style="width:{{ diag["result"] }}%">{{ diag["result"] }}%</div>
                 </div>
-                <small id="result" class="form-text text-muted">Based on the file submitted, we believe that this is mass lesion is {{ is_cancerous }}.  The prediction has a [{{ diag["result"] }}%] accuracy rate.</small>
+                <small id="result" class="form-text text-muted">Based on the file submitted, we believe that this is mass lesion is {{ diag["is_cancerous"] }}.  The prediction has a [65%] accuracy rate.</small>
                 <small class="form-text text-muted">Note: There are many factors affecting the accuracy rate, including factors such as quality of the x-ray, the lighting, and so on.  Please see your healthcare professionals for more info more information.</small>
             </div>
         </div>

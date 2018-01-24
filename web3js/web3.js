@@ -5,22 +5,23 @@
 steps to fill in the variables:
 - go on http://remix.ethereum.org/
 - use for example this contract:
-contract PatientInfo {
-    struct diagnosisInfo {
-        string fileHash;
-        string diagnosis;
-        string description;
-    }
+    contract PatientInfo {
+        struct diagnosisInfo {
+            string fileHash;
+            string diagnosis;
+            string description;
+            string date;
+        }
 
-    diagnosisInfo[] public diagnosises;
+        diagnosisInfo[] public diagnosises;
 
-    function addDiagnosis(string fileHash, string diagnosis, string description) {
-        diagnosises.push(diagnosisInfo(fileHash, diagnosis, description));
+        function addDiagnosis(string fileHash, string diagnosis, string description, string date) {
+            diagnosises.push(diagnosisInfo(fileHash, diagnosis, description, date));
+        }
+        function getDiagnosesCount() public constant returns(uint count) {
+            return diagnosises.length;
+        }
     }
-    function getDiagnosesCount() public constant returns(uint count) {
-        return diagnosises.length;
-    }
-}
 
 - go on Run, then compile it on the ropsten network (play network), or any network really
 - create a wallet, put some ether on it, and fill in `my_private_key`
@@ -127,6 +128,8 @@ try {
   //0x6477e21f70ee303bb0a47b96a737cbf64eb99852
   var contractAddress = request.params.contractaddress;
   var contract = new web3.eth.Contract(contractJson, contractAddress);
+  console.log(contractAddress)
+  console.log(id)
   contract.methods.diagnosises(id).call(function(error, result) {
         console.log(result);
         console.log(error);

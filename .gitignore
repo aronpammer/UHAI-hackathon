@@ -4,5 +4,5 @@ env3/
 node_modules/
 .DS_Store
 *.pyc
-machine_learning/
 package-lock.json
+machine_learning/inceptionv3_model.h5py
