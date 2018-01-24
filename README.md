@@ -31,6 +31,10 @@ Design decisions and pattern
 - The AI engine which we developed as part of this hackathon is used
   as a library inside the python web services logic
 
+Module interactions
+
+Please refer to the system.png diagram
+
 Dependencies
 
 - IPFS (and its dependencies)
@@ -45,7 +49,8 @@ Dependencies
 - pil
 
 Scalability
-UHAI can handle a few hundred requests per second
+
+UHAI can handle a few hundred requests per second.
 
 UHAI is dependent on IPFS which has an evaluated
 IO bandwidth of 2MBps in the current network that we have here.
